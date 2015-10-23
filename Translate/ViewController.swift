@@ -48,12 +48,28 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         pickerTextField.text = pickOption[row]
     }
     
+    func getLanguage()->String{
+        switch(pickerTextField.text){
+        case "French"?:
+            return "en|fr";
+        case "Turkish"?:
+            return "en|tr";
+        case "Gaelic"?:
+            return "en|ga";
+        case "Hindi"?:
+            return "en|hi";
+        default:
+            return "en|fr";
+        }
+    }
+    
     @IBAction func translate(sender: AnyObject) {
         
         let str = textToTranslate.text
         let escapedStr = str.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
         
-        let langStr = ("en|fr").stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+        //let langStr = ("en|fr").stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+        let langStr = (getLanguage()).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
         
         let urlStr:String = ("http://api.mymemory.translated.net/get?q="+escapedStr!+"&langpair="+langStr!)
         
@@ -89,6 +105,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 self.translatedText.text = result
             }
         }
+        
         
     }
 }
