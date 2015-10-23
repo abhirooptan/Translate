@@ -8,21 +8,44 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBOutlet weak var textToTranslate: UITextView!
     @IBOutlet weak var translatedText: UITextView!
     
+    @IBOutlet weak var pickerTextField: UITextField!
+    
     //var data = NSMutableData()
+    var pickOption = ["French", "Turkish", "Gaelic", "Hindi"]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var pickerView = UIPickerView()
+        pickerView.delegate = self
+        pickerTextField.inputView = pickerView
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickOption.count
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickOption[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerTextField.text = pickOption[row]
     }
     
     @IBAction func translate(sender: AnyObject) {
