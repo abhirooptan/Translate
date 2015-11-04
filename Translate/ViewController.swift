@@ -22,7 +22,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var pickerView = UIPickerView()
+        let pickerView = UIPickerView()
         pickerView.delegate = self
         pickerTextField.inputView = pickerView
     }
