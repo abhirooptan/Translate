@@ -10,21 +10,27 @@ import UIKit
 
 class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    @IBOutlet weak var textToTranslate: UITextView!
+    @IBOutlet weak var textToTranslate: UITextField!
     @IBOutlet weak var translatedText: UITextView!
     
-    @IBOutlet weak var pickerTextField: UITextField!
+    @IBOutlet weak var pickerFromTextField: UITextField!
+    @IBOutlet weak var pickerToTextField: UITextField!
     
-    //var data = NSMutableData()
-    var pickOption = ["French", "Turkish", "Gaelic", "Hindi"]
+    var pickOption = ["English" ,"French", "Turkish", "Gaelic", "Hindi"]
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let pickerView = UIPickerView()
-        pickerView.delegate = self
-        pickerTextField.inputView = pickerView
+        let fromPickerView = UIPickerView()
+        let toPickerView = UIPickerView()
+        // setting the tags for multiple PickerView selection
+        fromPickerView.tag = 0
+        toPickerView.tag = 1
+        fromPickerView.delegate = self
+        toPickerView.delegate = self
+        pickerFromTextField.inputView = fromPickerView
+        pickerToTextField.inputView = toPickerView
     }
     
     override func didReceiveMemoryWarning() {
@@ -45,68 +51,102 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        pickerTextField.text = pickOption[row]
+        // selection through different PickerView tags
+        if(pickerView.tag == 0){
+            pickerFromTextField.text = pickOption[row]
+        }
+        else{
+            pickerToTextField.text = pickOption[row]
+        }
     }
     
     func getLanguage()->String{
-        switch(pickerTextField.text){
+        var to:String
+        var from:String
+        switch(pickerFromTextField.text){
+        case "English"?:
+            from = "en"
         case "French"?:
-            return "en|fr";
+            from = "fr"
         case "Turkish"?:
-            return "en|tr";
+            from = "tr"
         case "Gaelic"?:
-            return "en|ga";
+            from = "ga"
         case "Hindi"?:
-            return "en|hi";
+            from = "hi"
         default:
-            return "en|fr";
+            from = "en"
         }
+        
+        switch(pickerToTextField.text){
+        case "English"?:
+            to = "en"
+        case "French"?:
+            to = "fr"
+        case "Turkish"?:
+            to = "tr"
+        case "Gaelic"?:
+            to = "ga"
+        case "Hindi"?:
+            to = "hi"
+        default:
+            to = "fr"
+        }
+        
+        var fromTo = from+"|"+to
+        return fromTo
     }
     
     @IBAction func translate(sender: AnyObject) {
         
-        let str = textToTranslate.text
-        let escapedStr = str.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+        // error check for same language selection
+        if(getLanguage() == "en|en" || getLanguage() == "fr|fr" || getLanguage() == "tr|tr" || getLanguage() == "ga|ga" || getLanguage() == "hi|hi"){
+            let alertController = UIAlertController(title: "Warning", message: "Please select two different languages", preferredStyle: .Alert)
+            alertController.addAction(UIAlertAction(title: "Got it?", style: .Default, handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        else{
+            let str = textToTranslate.text
+            let escapedStr = str!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
         
-        //let langStr = ("en|fr").stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-        let langStr = (getLanguage()).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+            let langStr = (getLanguage()).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
         
-        let urlStr:String = ("http://api.mymemory.translated.net/get?q="+escapedStr!+"&langpair="+langStr!)
+            let urlStr:String = ("http://api.mymemory.translated.net/get?q="+escapedStr!+"&langpair="+langStr!)
         
-        let url = NSURL(string: urlStr)
+            let url = NSURL(string: urlStr)
         
-        let request = NSURLRequest(URL: url!)// Creating Http Request
+            let request = NSURLRequest(URL: url!)// Creating Http Request
         
         //var data = NSMutableData()var data = NSMutableData()
         
-        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-        indicator.center = view.center
-        view.addSubview(indicator)
-        indicator.startAnimating()
+            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+            indicator.center = view.center
+            view.addSubview(indicator)
+            indicator.startAnimating()
         
-        var result = "<Translation Error>"
+            var result = "<Translation Error>"
         
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { response, data, error in
+            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { response, data, error in
             
-            indicator.stopAnimating()
+                indicator.stopAnimating()
             
-            if let httpResponse = response as? NSHTTPURLResponse {
-                if(httpResponse.statusCode == 200){
+                if let httpResponse = response as? NSHTTPURLResponse {
+                    if(httpResponse.statusCode == 200){
                     
-                    let jsonDict: NSDictionary!=(try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)) as! NSDictionary
+                        let jsonDict: NSDictionary!=(try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)) as! NSDictionary
                     
-                    if(jsonDict.valueForKey("responseStatus") as! NSNumber == 200){
-                        let responseData: NSDictionary = jsonDict.objectForKey("responseData") as! NSDictionary
+                        if(jsonDict.valueForKey("responseStatus") as! NSNumber == 200){
+                            let responseData: NSDictionary = jsonDict.objectForKey("responseData") as! NSDictionary
                         
-                        result = responseData.objectForKey("translatedText") as! String
+                            result = responseData.objectForKey("translatedText") as! String
+                        }
                     }
-                }
                 
-                self.translatedText.text = result
+                    self.translatedText.text = result
+                }
             }
         }
-        
-        
+
     }
 }
 

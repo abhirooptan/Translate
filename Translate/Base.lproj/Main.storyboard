@@ -17,21 +17,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="&lt;Text to Translate&gt;" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dii-Vg-90N">
-                                <rect key="frame" x="20" y="28" width="560" height="128"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Please Enter Text To Translate" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LaV-KV-DTJ">
+                                <rect key="frame" x="15" y="153" width="560" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="YTh-GD-fJj"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="&lt;Translated Text&gt;" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LaV-KV-DTJ">
-                                <rect key="frame" x="20" y="187" width="560" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="0Qw-rW-jUo"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -43,13 +31,44 @@
                                     <action selector="translate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OAU-9B-kHw"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wiB-PG-lPB">
-                                <rect key="frame" x="20" y="357" width="150" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wiB-PG-lPB">
+                                <rect key="frame" x="15" y="357" width="130" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select Language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GYk-HD-aaj">
-                                <rect key="frame" x="20" y="328" width="129" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="From" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GYk-HD-aaj">
+                                <rect key="frame" x="15" y="328" width="130" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter text to translate" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WDV-U1-PgC">
+                                <rect key="frame" x="15" y="69" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="yes" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text To Translate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Qt-tW-qu5">
+                                <rect key="frame" x="15" y="40" width="131" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translated Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEd-P8-Wx5">
+                                <rect key="frame" x="15" y="124" width="118" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z0P-VV-XvH">
+                                <rect key="frame" x="445" y="357" width="130" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="To" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U61-xY-7Hv">
+                                <rect key="frame" x="445" y="328" width="130" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="gNR-QT-fzV"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -57,19 +76,36 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="LaV-KV-DTJ" firstAttribute="leading" secondItem="dii-Vg-90N" secondAttribute="leading" id="1I9-UQ-zeR"/>
-                            <constraint firstItem="dii-Vg-90N" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="8IO-Lz-JKE"/>
-                            <constraint firstItem="Tk9-7M-DEK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GUW-Qr-ubm"/>
-                            <constraint firstItem="LaV-KV-DTJ" firstAttribute="top" secondItem="dii-Vg-90N" secondAttribute="bottom" constant="31" id="LTD-OY-g8P"/>
-                            <constraint firstAttribute="bottom" secondItem="Tk9-7M-DEK" secondAttribute="bottom" constant="20" symbolic="YES" id="P4Z-UM-mZY"/>
-                            <constraint firstItem="dii-Vg-90N" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="dYF-2W-FQ1"/>
-                            <constraint firstItem="dii-Vg-90N" firstAttribute="trailing" secondItem="LaV-KV-DTJ" secondAttribute="trailing" id="l4y-8y-Mw1"/>
-                            <constraint firstItem="LaV-KV-DTJ" firstAttribute="centerX" secondItem="Tk9-7M-DEK" secondAttribute="centerX" id="nxZ-oD-Bjx"/>
+                            <constraint firstItem="6Qt-tW-qu5" firstAttribute="centerX" secondItem="GYk-HD-aaj" secondAttribute="centerX" id="5EU-iT-Itt"/>
+                            <constraint firstItem="MEd-P8-Wx5" firstAttribute="leading" secondItem="LaV-KV-DTJ" secondAttribute="leading" id="6WV-gp-x6d"/>
+                            <constraint firstItem="Z0P-VV-XvH" firstAttribute="baseline" secondItem="wiB-PG-lPB" secondAttribute="baseline" id="7WH-5D-UnQ"/>
+                            <constraint firstItem="Z0P-VV-XvH" firstAttribute="trailing" secondItem="U61-xY-7Hv" secondAttribute="trailing" id="7oV-w3-y5h"/>
+                            <constraint firstItem="MEd-P8-Wx5" firstAttribute="leading" secondItem="WDV-U1-PgC" secondAttribute="leading" id="9k5-jG-ow7"/>
+                            <constraint firstItem="WDV-U1-PgC" firstAttribute="top" secondItem="6Qt-tW-qu5" secondAttribute="bottom" constant="8" symbolic="YES" id="DhI-ec-qnG"/>
+                            <constraint firstItem="6Qt-tW-qu5" firstAttribute="leading" secondItem="WDV-U1-PgC" secondAttribute="leading" id="JcE-WR-40F"/>
+                            <constraint firstItem="wiB-PG-lPB" firstAttribute="top" secondItem="GYk-HD-aaj" secondAttribute="bottom" constant="8" symbolic="YES" id="LSs-BF-CwC"/>
+                            <constraint firstItem="LaV-KV-DTJ" firstAttribute="trailing" secondItem="U61-xY-7Hv" secondAttribute="trailing" id="NH5-PK-PPu"/>
+                            <constraint firstItem="6Qt-tW-qu5" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="PAb-IJ-26A"/>
+                            <constraint firstItem="MEd-P8-Wx5" firstAttribute="top" secondItem="WDV-U1-PgC" secondAttribute="bottom" constant="25" id="R3G-S1-reu"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="wiB-PG-lPB" secondAttribute="bottom" constant="213" id="VOd-8x-LK9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WDV-U1-PgC" secondAttribute="trailing" constant="5" id="VZU-LQ-lkf"/>
+                            <constraint firstAttribute="bottom" secondItem="Tk9-7M-DEK" secondAttribute="bottom" constant="20" symbolic="YES" id="Y4W-y3-jRN"/>
+                            <constraint firstItem="LaV-KV-DTJ" firstAttribute="top" secondItem="MEd-P8-Wx5" secondAttribute="bottom" constant="8" symbolic="YES" id="Yho-Fc-1Vp"/>
+                            <constraint firstItem="GYk-HD-aaj" firstAttribute="top" secondItem="LaV-KV-DTJ" secondAttribute="bottom" constant="47" id="ZH3-Eh-8HS"/>
+                            <constraint firstItem="Tk9-7M-DEK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bKZ-4X-ID3"/>
+                            <constraint firstItem="U61-xY-7Hv" firstAttribute="leading" secondItem="Z0P-VV-XvH" secondAttribute="leading" id="egZ-MF-dtZ"/>
+                            <constraint firstItem="GYk-HD-aaj" firstAttribute="trailing" secondItem="wiB-PG-lPB" secondAttribute="trailing" id="kUT-6S-cY1"/>
+                            <constraint firstItem="WDV-U1-PgC" firstAttribute="trailing" secondItem="LaV-KV-DTJ" secondAttribute="trailing" id="qOr-3e-yoH"/>
+                            <constraint firstItem="wiB-PG-lPB" firstAttribute="leading" secondItem="GYk-HD-aaj" secondAttribute="leading" id="sSU-jT-6JU"/>
+                            <constraint firstItem="6Qt-tW-qu5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-5" id="sWY-Af-0wZ"/>
+                            <constraint firstItem="LaV-KV-DTJ" firstAttribute="leading" secondItem="GYk-HD-aaj" secondAttribute="leading" id="uI6-Tp-okw"/>
+                            <constraint firstItem="U61-xY-7Hv" firstAttribute="baseline" secondItem="GYk-HD-aaj" secondAttribute="baseline" id="z4M-Tj-fda"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="pickerTextField" destination="wiB-PG-lPB" id="cTb-uC-TTN"/>
-                        <outlet property="textToTranslate" destination="dii-Vg-90N" id="iQE-8q-2bI"/>
+                        <outlet property="pickerFromTextField" destination="wiB-PG-lPB" id="cTb-uC-TTN"/>
+                        <outlet property="pickerToTextField" destination="Z0P-VV-XvH" id="fGT-zx-D6v"/>
+                        <outlet property="textToTranslate" destination="WDV-U1-PgC" id="9pJ-jJ-j7g"/>
                         <outlet property="translatedText" destination="LaV-KV-DTJ" id="J1v-wi-lnm"/>
                     </connections>
                 </viewController>
