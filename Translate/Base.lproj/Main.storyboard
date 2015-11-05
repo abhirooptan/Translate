@@ -26,7 +26,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tk9-7M-DEK">
                                 <rect key="frame" x="268" y="550" width="64" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Translate"/>
+                                <state key="normal" title="Translate">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="translate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OAU-9B-kHw"/>
                                 </connections>
@@ -45,7 +47,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter text to translate" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WDV-U1-PgC">
                                 <rect key="frame" x="15" y="69" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="yes" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="yes" keyboardAppearance="alert" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text To Translate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Qt-tW-qu5">
                                 <rect key="frame" x="15" y="40" width="131" height="21"/>
@@ -106,6 +108,7 @@
                         <outlet property="pickerFromTextField" destination="wiB-PG-lPB" id="cTb-uC-TTN"/>
                         <outlet property="pickerToTextField" destination="Z0P-VV-XvH" id="fGT-zx-D6v"/>
                         <outlet property="textToTranslate" destination="WDV-U1-PgC" id="9pJ-jJ-j7g"/>
+                        <outlet property="translateButton" destination="Tk9-7M-DEK" id="82P-EM-Rqt"/>
                         <outlet property="translatedText" destination="LaV-KV-DTJ" id="J1v-wi-lnm"/>
                     </connections>
                 </viewController>

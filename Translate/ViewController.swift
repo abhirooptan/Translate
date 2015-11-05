@@ -15,8 +15,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     @IBOutlet weak var pickerFromTextField: UITextField!
     @IBOutlet weak var pickerToTextField: UITextField!
+    @IBOutlet weak var translateButton: UIButton!
     
     var pickOption = ["English" ,"French", "Turkish", "Gaelic", "Hindi"]
+    
+    /*var container: UIView = UIView()
+    var loadingView: UIView = UIView()
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()*/
     
     
     override func viewDidLoad() {
@@ -24,6 +29,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         let fromPickerView = UIPickerView()
         let toPickerView = UIPickerView()
+        
         // setting the tags for multiple PickerView selection
         fromPickerView.tag = 0
         toPickerView.tag = 1
@@ -31,6 +37,16 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         toPickerView.delegate = self
         pickerFromTextField.inputView = fromPickerView
         pickerToTextField.inputView = toPickerView
+        
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+    }
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -97,7 +113,41 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         return fromTo
     }
     
+    /*func showActivityIndicatory(uiView: UIView) {
+        var container: UIView = UIView()
+        container.frame = uiView.frame
+        container.center = uiView.center
+        container.backgroundColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:0.3)
+        
+        var loadingView: UIView = UIView()
+        loadingView.frame = CGRectMake(0, 0, 80, 80)
+        loadingView.center = uiView.center
+        loadingView.backgroundColor = UIColor(red:0.27, green:0.27, blue:0.27, alpha:0.7)
+        loadingView.clipsToBounds = true
+        loadingView.layer.cornerRadius = 10
+        
+        var actInd: UIActivityIndicatorView = UIActivityIndicatorView()
+        actInd.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+        actInd.activityIndicatorViewStyle =
+            UIActivityIndicatorViewStyle.WhiteLarge
+        actInd.center = CGPointMake(loadingView.frame.size.width / 2,
+            loadingView.frame.size.height / 2);
+        loadingView.addSubview(actInd)
+        container.addSubview(loadingView)
+        uiView.addSubview(container)
+        actInd.startAnimating()
+    }
+    
+    func hideActivityIndicator(uiView: UIView) {
+        activityIndicator.stopAnimating()
+        container.removeFromSuperview()
+    }*/
+    
     @IBAction func translate(sender: AnyObject) {
+        
+        if(textToTranslate.text == nil){
+            translateButton.enabled = false
+        }
         
         // error check for same language selection
         if(getLanguage() == "en|en" || getLanguage() == "fr|fr" || getLanguage() == "tr|tr" || getLanguage() == "ga|ga" || getLanguage() == "hi|hi"){
@@ -106,6 +156,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             self.presentViewController(alertController, animated: true, completion: nil)
         }
         else{
+            
+            //let session = NSURLSession.sharedSession()
             let str = textToTranslate.text
             let escapedStr = str!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
         
@@ -120,15 +172,20 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         //var data = NSMutableData()var data = NSMutableData()
         
             let indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-            indicator.center = view.center
+            indicator.center = translatedText.center
             view.addSubview(indicator)
             indicator.startAnimating()
+            
+            //showActivityIndicatory(self.view)
         
             var result = "<Translation Error>"
         
-            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { response, data, error in
+           NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { response, data, error in
             
+            
+            //session.dataTaskWithRequest(request){(data, response, error) -> Void in
                 indicator.stopAnimating()
+                //self.hideActivityIndicator(self.view)
             
                 if let httpResponse = response as? NSHTTPURLResponse {
                     if(httpResponse.statusCode == 200){
@@ -146,7 +203,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 }
             }
         }
-
     }
 }
 
